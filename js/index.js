@@ -46,7 +46,7 @@ const seaport = new OpenSeaPort(
 )
 
 async function run() {
-  const collectionName = "trlab";
+  const collectionName = "voxodeus-v3";
   var floorInfo = await getFloorInfo("testnets.opensea.io", collectionName);
   if (floorInfo && floorInfo.url) {
     console.log(floorInfo);
