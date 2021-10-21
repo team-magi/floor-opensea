@@ -46,9 +46,10 @@ const seaport = new OpenSeaPort(
 )
 
 async function run() {
-  const slug = "trlab";
-  var floorInfo = await getFloorInfo(slug);
-  if (floorInfo) {
+  const collectionName = "trlab";
+  var floorInfo = await getFloorInfo("testnets.opensea.io", collectionName);
+  if (floorInfo && floorInfo.url) {
+    console.log(floorInfo);
     var urlArr = floorInfo.url.split('/');
     console.log(urlArr);
     console.log(urlArr[urlArr.length - 2]);
