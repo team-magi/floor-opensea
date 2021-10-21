@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer-extra')
 const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 puppeteer.use(StealthPlugin())
 
-async function getFloorInfo(slug, mode = "headless") {
+async function getFloorInfo(website, collectionName, mode = "headless") {
   const browser = await puppeteer.launch({
     headless: mode === "debug" ? false : true,
     args: ['--start-maximized'],
@@ -13,7 +13,7 @@ async function getFloorInfo(slug, mode = "headless") {
       console.debug(consoleMessageObject._text)
     }
   });
-  await page.goto(`https://testnets.opensea.io/collection/${slug}?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW`);
+  await page.goto(`https://${website}/collection/${collectionName}?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW`);
   await page.waitForTimeout(5);
   const floorInfo = await page.evaluate(() => {
     // const cardsNodeList = document.querySelectorAll(".Asset--anchor .AssetCardFooter--price-amount");
@@ -37,7 +37,7 @@ async function getFloorInfo(slug, mode = "headless") {
       }
     }).filter(val => val);
     if (floorList.length === 0) {
-      return undefined;
+      return {};
     } else {
       floorList.sort(function (a, b) {
         return a.priceStr.localeCompare(b.priceStr);

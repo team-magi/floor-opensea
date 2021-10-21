@@ -61,12 +61,12 @@ async function run() {
     });
     // 0x4aC5Bd70cE4FB7c1FE7C22aFd4736FA086cD86f0
     console.log(accountAddress);
-    const transactionHash = await seaport.fulfillOrder({
-      order,
-      accountAddress,
-      recipientAddress
-    });
-    console.log(transactionHash);
+    // const transactionHash = await seaport.fulfillOrder({
+    //   order,
+    //   accountAddress,
+    //   recipientAddress
+    // });
+    // console.log(transactionHash);
   } else {
     console.log("no floor price shop");
   }
